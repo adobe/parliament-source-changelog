@@ -1,6 +1,6 @@
 {
   "name": "@adobe/parliament-source-changelog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Source changelog files into graphql",
   "main": "index.js",
   "scripts": {
