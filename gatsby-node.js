@@ -67,17 +67,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   });
 
-  const changelog = result.data.allMdx.edges[0].node;
+  if (result.data.allMdx.edges[0]) {
+    const changelog = result.data.allMdx.edges[0].node;
 
-  createPage({
-    path: "/changelog",
-    component: changelogTemplate,
-    context: {
-      slug: changelog.frontmatter.slug,
-      selectedKey: changelog.frontmatter.title,
-      pages,
-    },
-  });
+    createPage({
+      path: "/changelog",
+      component: changelogTemplate,
+      context: {
+        slug: changelog.frontmatter.slug,
+        selectedKey: changelog.frontmatter.title,
+        pages,
+      },
+    });
+  }
 };
 
 const HEADER_TAB_TYPE = `HeaderTabs`;
