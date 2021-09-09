@@ -25,7 +25,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     {
-      allMdx(
+      allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] }
         limit: 1000
         filter: {
@@ -51,11 +51,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  const pages = result.data.allMdx.edges.map(({ node }) => {
+  const pages = result.data.allMarkdownRemark.edges.map(({ node }) => {
     return { title: node.frontmatter.title, path: node.frontmatter.slug };
   });
 
-  result.data.allMdx.edges.forEach(({ node }) => {
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.slug,
       component: changelogTemplate,
@@ -67,8 +67,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   });
 
-  if (result.data.allMdx.edges[0]) {
-    const changelog = result.data.allMdx.edges[0].node;
+  if (result.data.allMarkdownRemark.edges[0]) {
+    const changelog = result.data.allMarkdownRemark.edges[0].node;
 
     createPage({
       path: "/changelog",
